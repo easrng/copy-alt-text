@@ -1,1 +1,0 @@
-# copy-alt-text
