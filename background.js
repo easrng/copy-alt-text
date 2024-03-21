@@ -50,15 +50,17 @@ browser.contextMenus.onClicked.addListener((info, tab) => {
               code: `copyToClipboard(${JSON.stringify(text)})`,
             });
           })
-          .then(() => {
-            notify("Alt text copied!", `Copied “${text}” to the clipboard.`);
-          });
       })
       .catch((error) => {
         if (tab.url.startsWith("about:")) {
           notify(
             "Failed to copy.",
             "This page is built in to Firefox and can’t be accessed by extensions.",
+          );
+        } else if (new URL(tab.url) === "https://addons.mozilla.org") {
+          notify(
+            "Failed to copy.",
+            "The Firefox Add-ons website can’t be accessed by extensions.",
           );
         } else {
           notify(
